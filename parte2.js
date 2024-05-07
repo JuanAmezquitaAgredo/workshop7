@@ -27,45 +27,51 @@
 
 //////////////Tienda de punto online ////////////////////////////
 //PERSONAS
-function persona(nombre,email,clave){
+function Persona(nombre,email,clave){
     this.nombre = nombre;
     this.email = email;
     this.clave = clave;
 }
 
 //Administrador
-function administrador(nombre,email,clave,tipoadmi){
-    persona.call(this,nombre,email,clave);
+function Administrador(nombre,email,clave,tipoadmi){
+    Persona.call(this,nombre,email,clave);
     this.tipoadmi = tipoadmi;
 }
 
-administrador.prototype.agregarProducto = function(){
-    return console.log(`Se ha agregado el producto correctamente`);
+Administrador.prototype = Object.create(Persona.prototype);
+Administrador.prototype.constructor = Administrador;
+
+Administrador.prototype.agregarProducto = function(){
+    return console.log(`Se ha agregado el Producto correctamente`);
 };
-administrador.prototype.modificarProducto = function(){
-    return console.log(`Se ha modificado el producto`);
+Administrador.prototype.modificarProducto = function(){
+    return console.log(`Se ha modificado el Producto`);
 };
-administrador.prototype.eliminarUsuario = function(){
-    return console.log(`Se ha eliminado el usuario`);
+Administrador.prototype.eliminarUsuario = function(){
+    return console.log(`Se ha eliminado el Usuario`);
 };
 
 //Usuario
-function usuario(nombre,email,clave,puntosAcumulados){
-    persona.call(this,nombre,email,clave);
+function Usuario(nombre,email,clave,puntosAcumulados){
+    Persona.call(this,nombre,email,clave);
     this.puntosAcumulados = puntosAcumulados;
 }
 
-usuario.prototype.acumularPuntos = function(){
+Usuario.prototype = Object.create(Persona.prototype);
+Usuario.prototype.constructor = Usuario;
+
+Usuario.prototype.acumularPuntos = function(){
     return console.log(`Se han acumulado los puntos`);
 };
 
-usuario.prototype.canjearPuntos = function(){
+Usuario.prototype.canjearPuntos = function(){
     return console.log(`Se han canjeado los puntos`);
 };
 
 
 //PRODUCTOS
-function producto(nombre,puntosNecesarios,cantidadDisponible,precio,stock){
+function Producto(nombre,puntosNecesarios,cantidadDisponible,precio,stock){
   this.nombre = nombre;
   this.puntosNecesarios = puntosNecesarios;
   this.cantidadDisponible = cantidadDisponible;
@@ -76,9 +82,12 @@ function producto(nombre,puntosNecesarios,cantidadDisponible,precio,stock){
 //Producto Fisico
 
 function ProductoFisico(nombre,puntosNecesarios,cantidadDisponible,precio,stock,peso){
-    producto.call(this,nombre,puntosNecesarios,cantidadDisponible,precio,stock);
+    Producto.call(this,nombre,puntosNecesarios,cantidadDisponible,precio,stock);
     this.peso = peso;
 }
+
+ProductoFisico.prototype = Object.create(Producto.prototype);
+ProductoFisico.prototype.constructor = ProductoFisico;
 
 ProductoFisico.prototype.actualizarStock = function(){
   return  console.log("El Stock se ha actualizado");
@@ -93,9 +102,12 @@ ProductoFisico.prototype.enviarProductos = function(){
 //Producto digital
 
 function ProductoDigital(nombre,puntosNecesarios,cantidadDisponible,precio,stock,url){
-  producto.call(this,nombre,puntosNecesarios,cantidadDisponible,precio,stock);
+  Producto.call(this,nombre,puntosNecesarios,cantidadDisponible,precio,stock);
   this.url = url;
 }
+
+ProductoDigital.prototype = Object.create(Producto.prototype);
+ProductoDigital.prototype.constructor = ProductoDigital;
 
 ProductoDigital.prototype.descargar = function(){
 return  console.log("Se ha descargado");
@@ -104,172 +116,182 @@ ProductoDigital.prototype.obtnereInfo = function(){
 return  console.log("Información obtenida");
 }
 ProductoDigital.prototype.obtenerProductoEmail = function(){
-return  console.log("Se obtuvo el email del producto");
+return  console.log("Se obtuvo el email del Producto");
 }
 
 //ACTIVIDAD
-function actividad(tipo,puntosOtorgados){
+function Actividad(tipo,puntosOtorgados){
   this.tipo = tipo;
   this.puntosOtorgados = puntosOtorgados;
 }
 
-actividad.prototype.completarActividad = function(){
+Actividad.prototype.completarActividad = function(){
   console.log("Actividad completada");
 }
 //CATEGORIA PRODUCTOS
-function categoriadeproductos(nombre,descripcion){
+function Categoriadeproductos(nombre,descripcion){
   this.nombre = nombre;
-  this.descripcion = descripcion;
+  this.descripcion = descripcion;plato
+  plato
 }
-categoriadeproductos.prototype.listarProductos = function(){
-  console.log("Se listaron los productos");
-}
-//ORDEN DE ENCAJE
-function ordendeencaje(usuario,producto,fecha){
-  this.usuario = usuario;
-  this.producto = producto;
-  this.fecha = fecha;
-}
-ordendeencaje.prototype.confirmarOrden = function(){
+Ordendeencaje.prototype.confirmarOrden = function(){
   console.log("Orden Confirmada");
 }
-ordendeencaje.prototype.cancelarOrden = function(){
+Ordendeencaje.prototype.cancelarOrden = function(){
   console.log("Orden Cancelada");
 }
 
 //////////////////////Entrega de comida ////////////////////////////
 
 //PERSONA
-function persona(nombre,email,clave){
+function Persona(nombre,email,clave){
   this.nombre = nombre;
   this.email = email;
   this.clave = clave;
 }
 
-persona.prototype.autenticacion = function(){
+Persona.prototype.autenticacion = function(){
   console.log("Persona autenticada");
 }
 
 //CLiente
-function cliente(nombre,email,clave,direccion,telefono){
-  persona.call(this,nombre,email,clave);
+function Cliente(nombre,email,clave,direccion,telefono){
+  Persona.call(this,nombre,email,clave);
   this.direccion = direccion;
   this.telefono = telefono;
 }
 
-cliente.prototype.realizarPedido = function(){
+Cliente.prototype = Object.create(Persona.prototype);
+Cliente.prototype.constructor = Cliente;
+
+Cliente.prototype.realizarPedido = function(){
   console.log("Pedido realizado");
 }
 
-cliente.prototype.verHistorialPedido = function(){
+Cliente.prototype.verHistorialPedido = function(){
   console.log("Historial de pedidos proyectado");
 }
 
 //Repartidor
-function repartidor(nombre,email,clave,vehiculo,disponibilidad){
-  persona.call(this, nombre,email,clave);
+function Repartidor(nombre,email,clave,vehiculo,disponibilidad){
+  Persona.call(this, nombre,email,clave);
   this.vehiculo = vehiculo;
   this.disponibilidad = disponibilidad;
 }
 
-repartidor.prototype.aceptarEnvio = function(){
+Repartidor.prototype = Object.create(Persona.prototype);
+Repartidor.prototype.constructor = Repartidor;
+
+Repartidor.prototype.aceptarEnvio = function(){
   console.log("Envio aceptado");
 }
 
-repartidor.prototype.actualizarUbicacion = function(){
+Repartidor.prototype.actualizarUbicacion = function(){
   console.log("Ubicacion actualizada");
 }
 
-repartidor.prototype.completarEntrega = function(){
+Repartidor.prototype.completarEntrega = function(){
   console.log("Entrega completada");
 }
 
-repartidor.prototype.actualizarEstado = function(){
+Repartidor.prototype.actualizarEstado = function(){
   console.log("Estado actualizado");
 }
 
 //RESTAURANTE
 
-function restaurante(nombre){
+function Restaurante(nombre){
   this.nombre = nombre;
 }
 
-restaurante.prototype.agregarPlato = function(){
+Restaurante.prototype.agregarPlato = function(){
   console.log("Plato agregado");
 }
 
-restaurante.prototype.actualizarPlato = function(){
+Restaurante.prototype.actualizarPlato = function(){
   console.log("Plato actualizado");
 }
 
-//restaurante digital
+//Restaurante digital
 
-function restaurantedigital(nombre,menuqr){
-  restaurante.call(this,nombre);
+function Restaurantedigital(nombre,menuqr){
+  Restaurante.call(this,nombre);
   this.menuqr = menuqr;
 }
 
-//restaurante fisico
+Restaurantedigital.prototype = Object.create(Restaurante.prototype);
+Restaurantedigital.prototype.constructor = Restaurantedigital;
 
-function restaurantefisico(nombre,direccion,menufisico){
-  restaurante.call(this,nombre);
+//Restaurante fisico
+
+function Restaurantefisico(nombre,direccion,menufisico){
+  Restaurante.call(this,nombre);
   this.direccion = direccion;
   this.menufisico = menufisico;
 }
 
-restaurantefisico.prototype.eliminarPlato = function(){
+Restaurantefisico.prototype = Object.create(Restaurante.prototype);
+Restaurantefisico.prototype.constructor = Restaurantefisico;
+
+Restaurantefisico.prototype.eliminarPlato = function(){
   console.log("Plato eliminado");
 }
 
 //MENU 
 
-function menu(plato){
+function Menu(plato){
   this.plato = plato;
 }
 
 //Menu Fisico
-function menufisico(plato,carta){
-  menu.call(this,plato)
+function Menufisico(plato,carta){
+  Menu.call(this,plato)
   this.carta = carta;
 }
 
-menufisico.prototype.impresion = function(){
+Menufisico.prototype = Object.create(Menu.prototype);
+Menufisico.prototype.constructor = Menufisico;
+
+Menufisico.prototype.impresion = function(){
   console.log("ver impresion");
 }
 
-menufisico.prototype.visualizacio = function(){
+Menufisico.prototype.visualizacio = function(){
   console.log("visualizado");
 }
 
 //Menu Digital
 
-function menuDigital(plato,url){
-  menu.call(this,plato)
+function MenuDigital(plato,url){
+  Menu.call(this,plato)
   this.url = url;
 }
 
-menuDigital.prototype.generalQr = function(){
+MenuDigital.prototype = Object.create(Menu.prototype);
+MenuDigital.prototype.constructor = MenuDigital;
+
+MenuDigital.prototype.generalQr = function(){
   console.log("QR generado");
 }
 
 //PEDIDO
 
-function pedido(nombre,descripcion){
+function Pedido(nombre,descripcion){
   this.nombre = nombre;
   this.descargar = descripcion;
 }
 
-pedido.prototype.listarProductos = function(){
+Pedido.prototype.listarProductos = function(){
   console.log("Productos Listados");
 }
 
 //PLATO
 
-function plato(tipo,puntosotorgados){
+function Plato(tipo,puntosotorgados){
   this.tipo = tipo;
   this.puntosotorgados = puntosotorgados
 }
 
-plato.prototype.completarActividad = function(){
+Plato.prototype.completarActividad = function(){
   console.log("Actividad completada");
 }
